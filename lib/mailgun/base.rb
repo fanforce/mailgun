@@ -76,7 +76,7 @@ module Mailgun
         :method      => method,
         :url         => url,
         :payload     => parameters,
-        :ssl_version => 'SSLv3'
+        :ssl_version => 'SSLv23'
       }
       return JSON.parse(RestClient::Request.execute(rest_client_params))
     rescue => e
