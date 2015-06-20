@@ -72,7 +72,13 @@ module Mailgun
   def self.submit(method, url, parameters={})
     begin
       parameters = {:params => parameters} if method == :get
-      return JSON.parse(RestClient.send(method, url, parameters))
+      rest_client_params = {
+        :method      => method,
+        :url         => url,
+        :payload     => parameters,
+        :ssl_version => 'SSLv3'
+      }
+      return JSON.parse(RestClient::Request.execute(rest_client_params))
     rescue => e
       begin
         error_code = e.http_code
